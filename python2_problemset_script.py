@@ -1,7 +1,24 @@
 #!/usr/bin/env python3
-var=20202020202020202020202020202020202020202
-if var <5:
-	print("Ay captain")
+var=int(input("enter a number: "))
+if var ==50:
+	print("equal to 50")
+elif var >0:
+	print("Positive")
+	if var < 50:
+		print("and less than 50")
+	else:
+		print("and greater than 50")
+	if var % 2 ==0:
+		print("and even")
+	else:
+		print("and odd")
+	if var % 3 ==0:
+		print("add a multiple of 3")
+	else:
+		print("and not a multiple by 3")
+elif var <0:
+	print("Negative")
+
 else:
-	print("Nah")
+	print("Equal to 0")
 
