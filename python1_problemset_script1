@@ -1,2 +1,9 @@
 #!/usr/bin/env python3
-My name: Thomas
+my_name="Thomas"
+print("My name:", my_name)
+my_age=29
+print("My age:", my_age)
+my_institution="Baylor College of Medicine"
+print("My institution:", my_institution)
+
+
