@@ -1,0 +1,23 @@
+import sys
+var =int(sys.argv[1])
+if var ==50:
+        print("equal to 50")
+elif var >0:
+        print("Positive")
+        if var < 50:
+                print("and less than 50")
+        else:
+                print("and greater than 50")
+        if var % 2 ==0:
+                print("and even")
+        else:
+                print("and odd")
+        if var % 3 ==0:
+                print("add a multiple of 3")
+        else:
+                print("and not a multiple by 3")
+elif var <0:
+        print("Negative")
+
+else:
+        print("Equal to 0")
