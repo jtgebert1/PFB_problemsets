@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+#use list comprehension to print out every number between 0-99
+print([1+x for x in range(-1, 99)])
+
+
