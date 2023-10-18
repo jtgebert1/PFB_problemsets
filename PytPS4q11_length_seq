@@ -4,6 +4,8 @@ sequences=['ATGCCCGGCCCGGC','GCGTGCTAGCAATACGATAAACCGG', 'ATATATATCGAT','ATGGGCC
 
 for seq in sequences:
 	length=len(seq)
-	print(length, "\t",seq)
+	pos=sequences.index(seq)
+	print(length, "\t",seq, "\t", pos)
+
 
 
