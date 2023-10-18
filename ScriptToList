@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+#define variable taxa and print
+taxa='sapiens, erectus, neanderthalensis'
+print(taxa)
+print(taxa[1])
+print(type(taxa))
+
+#split taxa into a list of objects
+species=taxa.split(', ')
+print(species)
+print(species[1])
+
+species_sorted=sorted(species)
+print(species_sorted)
+
