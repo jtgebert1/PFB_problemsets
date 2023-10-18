@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+
+sequences=['ATGCCCGGCCCGGC','GCGTGCTAGCAATACGATAAACCGG', 'ATATATATCGAT','ATGGGCCC']
+
+for seq in sequences:
+	length=len(seq)
+	print(length, "\t",seq)
+
+
