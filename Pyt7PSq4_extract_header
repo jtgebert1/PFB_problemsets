@@ -1,0 +1,16 @@
+#!/usr/bin/env Python3
+import re
+
+#open file 
+with open("Python_07.fasta") as raw:
+	#read file and define new variable
+	fasta_string=''  #define new empty string
+	for line in raw:     #read in the file, line by line
+		fasta_string=fasta_string+line		 #convert to string 
+
+	for headers in re.finditer(r">(\w+)(.+)", fasta_string):
+		print(f'id:{headers.group(1)} desc:{headers.group(2)}')
+
+
+
+
