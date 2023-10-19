@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+setA={'3','14','15','9','26','5','35','9'}
+setB={'60','22','14','0','9'}
+
+#find intersection of sets
+intersection= setA & setB
+print("Intersection:",intersection)
+
+#find difference 
+diff=setA-setB
+print('Difference:', diff)
+
+#find union 
+union=setA|setB
+print('Union:', union)
+
+#find symm diff
+symmdiff=setA^setB
+print("Symmetrical difference: ",symmdiff)
+
+
+
