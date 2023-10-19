@@ -7,7 +7,8 @@ with open("Python_07.fasta") as raw:
 	fasta_string=''  #define new empty string
 	for line in raw:     #read in the file, line by line
 		fasta_string=fasta_string+line		 #convert to string 
-
+	
+	#uses a for loop with finditer and .group to separate elements of header	
 	for headers in re.finditer(r">(\w+)(.+)", fasta_string):
 		print(f'id:{headers.group(1)} desc:{headers.group(2)}')
 
