@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+#open file as read 
+with open("Python_06.seq.txt") as seqread:
+
+#reverse complement
+	for seq in seqread:
+		seq=seq.rstrip()
+		ID,sequence=seq.split()
+		sequp=sequence.upper() #change all to uppercase
+		rev=sequp[::-1]   #reverse
+		revcomp=rev.replace('A','t').replace('T','a').replace('G','c').replace('C','g') #complement
+		revcomp_up=revcomp.upper()
+		print(f"{ID} reverse complement: {revcomp_up}")
+
