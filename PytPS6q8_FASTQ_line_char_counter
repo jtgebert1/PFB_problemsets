@@ -1,0 +1,26 @@
+#!/usr/bin/env Python3
+
+#open FASTQ file, count lines, count characters, report average length of line
+
+with open("Python_06.seq.txt") as raw:
+	#count lines 
+	
+	ctdict={}
+	linecount=0
+	
+	for line in raw:
+		linecount=linecount+1
+		line=line.rstrip()
+		chrs=len(line)
+		ctdict[line]=chrs
+	
+	chrcnt=0
+	for key in ctdict: 
+		chrcnt=chrcnt+int(ctdict[key])
+	
+	#avg characters per line
+	avg=chrcnt/linecount
+	
+		
+	
+	print(f'# of lines: {linecount} \n# of characters: {chrs} \nAverage # characters per line: {avg}')
