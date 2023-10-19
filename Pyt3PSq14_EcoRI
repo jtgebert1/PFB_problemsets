@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+dna='ATTGGCGTGACACGTGTGAATTCTGGT'
+
+#Find EcoRI site = GAATTC
+EcoRI='GAATTC'
+EcoRIstart=dna.index(EcoRI)+1
+EcoRIend=EcoRIstart+6
+
+print(f'''EcoRI start position: {EcoRIstart}
+EcoRI end position: {EcoRIend}''')
+
