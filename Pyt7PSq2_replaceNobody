@@ -1,0 +1,19 @@
+#!/usr/bin/env Python3
+import re
+
+#open file 
+with open("Python_07_nobody.txt") as nobody:
+	#read file and define new variable
+	astring=''  #define new empty string
+	for line in nobody:     #read in the file, line by line
+		astring=astring+line		 #convert to string 
+	
+	newpoem=re.sub(r"Nobody","Thomas",astring) #iterate through the string to find matches,with coordinates indicating start and end of each instance 
+
+print(newpoem)
+
+
+#nby=re.search(r"Nobody", nobody)
+#print(nby)
+	#print(asseq)
+
