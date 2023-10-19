@@ -1,0 +1,15 @@
+#!/usr/bin/en python3
+
+#open file, make all characters uppercase, write to new file 
+
+with open("Python_06.txt", "r") as fileobj_in, open("Python_06_uc.txt", "w") as fileobj_out:
+	for line in fileobj_in:
+		line=line.upper()	
+		fileobj_out.write(line)
+
+
+#print lines of new file to screen 
+with open("Python_06_uc.txt", "r") as outread:
+	for line in outread:
+		print(line)
+
