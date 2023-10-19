@@ -1,19 +1,22 @@
 #!/usr/bin/env python
 import sys
 
-favdict={'color':'orange', 'book':'The Pearl', 'food':'Panang curry'}
+favdict={'color':'orange', 'book':'The Pearl', 'food':'Panang curry','organism':'drosophila'}
+
+favthing=input('Who is your favorite musician?:')
+
+favdict['musician']=favthing
+
+print(f"Your favorite musician is {favdict['musician']}")
+print("updated list of favorites:")
+
+for fav in favdict:
+	print(fav,":", favdict[fav])
 
 
-favdict['organism']='drosophila'
-favthing=favdict['organism']
-##print(favthing)
 
-##for loop to print all items in dictionary 
-for item in favdict:
-	print(item)
 
-##take item from command line and print 
-item=input("which of the above?:")
-print(favdict[item])
 
+##change value of favorite organism
+#moved up to precede loop
 
