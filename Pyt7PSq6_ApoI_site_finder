@@ -1,0 +1,19 @@
+#!usr/bin/env Python3
+
+import re
+
+
+#find ApoI sites 
+#ApoI sites are R^AATY where R=G or A and Y=T or C. ^ indicates the cut site
+
+with open('Python_07_ApoI.fasta', "r") as raw:    #opens file as raw)
+	seq=''
+	for line in raw: 
+		if re.search(r">", line):
+			seq=seq+line
+		else:
+			line=line.rstrip()
+			seq=seq+line
+
+	for match in re.finditer(r"[GA]AAT[TC]", seq):
+		print(match)
