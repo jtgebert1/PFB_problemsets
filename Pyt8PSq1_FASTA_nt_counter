@@ -1,0 +1,37 @@
+#!/usr/bin/env Python3
+#Goal for problemset 7 question: create a "FASTA parser" that pulls individual sequences from a FASTA file and stores them as individual components. Do this using a dictionary with the key being the header, the value being the sequence. Use Regular Expressions
+#Modified goal for problemset 8 question 1: print out each sequence name and its nucleotide composition
+
+import re
+
+#open file 
+with open("Python_08.fasta") as raw:
+	#read file and define new variable
+	fasta_string=''  #define new empty string}
+	for line in raw:     #read in the file, line by line
+		if re.search(r">(\w+.+)", line): #determine if it is a header. If so, do NOT apply .rstrip
+			fasta_string=fasta_string+line  #add to list
+		else:
+			line=line.rstrip()								#if it is NOT a header, .rstrip to remove /n
+			fasta_string=fasta_string+line		 #convert to string 
+	
+	#uses a for loop with finditer and .group to separate header and sequence
+  #creates dictionary in which key = header, value= sequence.
+	#for PS8q1, make additional dictionary in which key gene name, value is another dict w key being nucleotides, values counts 
+	FASTAdict={}
+	ntcountdict={}   
+	for element in re.finditer(r">(\w+).*\n(\w+)", fasta_string):
+		FASTAdict[element.group(1)]=element.group(2)
+
+#For each gene in FASTAdict, pulls the associated sequence, turns it to a string. Then, counts each nucleotide and saves the count in a variable. Defines a new dictionary for each gene name as the key, then a dictionary as the value, with the nested dictionary having each nucleotide as the key, and the count as the value. Then prints the gene name and #A, #T, #G, #C 	
+	for gene in FASTAdict:
+		seq=FASTAdict[gene]
+		Acount=seq.count('A')
+		Ccount=seq.count('C')
+		Gcount=seq.count('G')
+		Tcount=seq.count('T')
+		ntcountdict[gene]={"A":Acount,"C":Ccount,"G":Gcount,"T":Tcount}
+		#print('Gene:',[gene], 'Acount:',[Acount], 'Ccount:',[Ccount])			
+		print({gene},'\t',Acount,'\t',Tcount,'\t',Gcount,'\t',Ccount)
+
+
