@@ -1,0 +1,20 @@
+#!/usr/bin/env Python3
+
+import sys
+import re
+
+with open("test_enzyme_list.txt") as bionet:
+	enzyme_dict={}
+	count=0
+	header=''
+	for line in bionet:
+		count=count+1
+		if count < 10:
+			header=header+line	
+		else:
+			for found in re.finditer(r"(.+?)\s{2,}(\S.*)", line):
+				enzyme=found.group(1)
+				seq=found.group(2)
+				enzyme_dict[enzyme]=seq 
+
+	print(enzyme_dict)
