@@ -1,0 +1,33 @@
+#!usr/bin/env Python3
+
+import re
+
+
+#find ApoI sites 
+#ApoI sites are R^AATY where R=G or A and Y=T or C. ^ indicates the cut site
+
+with open('Python_07_ApoI.fasta', "r") as raw:    #opens file as raw)
+	seq=''
+	header=''
+	for line in raw: 
+		if re.search(r">", line):
+			header=line
+		else:
+			line=line.rstrip()
+			seq=seq+line
+
+#make sequnece with cutsites marked by ^ 
+	newseq=re.sub(r"([GA])(AAT[TC])",r"\1^\2",seq)
+
+#make list of fragments using ^ as delineator
+	seq_list=newseq.split('^')
+	
+#make new list, sorted by length 
+	seq_list.sort(key=len)
+
+#print using for loop to separate each sequence onto a new line
+	count=0
+	for seq in seq_list:
+		count=count+1
+		print(f'{count}: {seq}')
+
