@@ -1,0 +1,31 @@
+#!/usr/bin/env Python3
+#Goal for problemset 7 question: create a "FASTA parser" that pulls individual sequences from a FASTA file and stores them as individual components. Do this using a dictionary with the key being the header, the value being the sequence. Use Regular Expressions
+#Modified goal for problemset 8 question 1: print out each sequence name and its nucleotide composition
+
+import re
+import sys 
+
+#open file 
+with open("Python_08.fasta", "r") as raw, open('Python_08.codons-frame-1.nt', "w") as seqout:
+	#read file and define new variable
+	fasta_string=''  #define new empty string}
+	for line in raw:     #read in the file, line by line
+		if re.search(r">(\w+.+)", line): #determine if it is a header. If so, do NOT apply .rstrip
+			fasta_string=fasta_string+line  #add to list
+		else:
+			line=line.rstrip()								#if it is NOT a header, .rstrip to remove /n
+			fasta_string=fasta_string+line		 #convert to string 
+	#After the above block, the entire file is saved in the variable fasta_string. Headers are separated by sequences using a newline character, sequences are continuous-no new lines
+	#uses a for loop with finditer and .group to separate header and sequence
+  #creates dictionary in which key = header, value= sequence.
+	FASTAdict={}
+	for element in re.finditer(r">(\w+).*\n(\w+)", fasta_string):
+		FASTAdict[element.group(1)]=element.group(2)
+
+	#break sequences into codons
+	for gene in FASTAdict:
+		seq=str(FASTAdict[gene])
+		codons=re.sub(r'([GACT]{3})',r'\1 ', seq)
+	#write to new file, defined in line 9 & print confirmation
+		seqout.write(f"{gene}\n{codons}")
+	print('file written to', seqout) 
