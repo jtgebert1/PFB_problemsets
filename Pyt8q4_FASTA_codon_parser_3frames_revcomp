@@ -1,0 +1,41 @@
+#!/usr/bin/env Python3
+
+import re
+import sys 
+
+#open file 
+with open("Python_08.fasta", "r") as raw, open('Python_08.codons-6frame_RC.nt', "w") as seqout:
+	#read file and define new variable
+	fasta_string=''  #define new empty string}
+	for line in raw:     #read in the file, line by line
+		if re.search(r">(\w+.+)", line): #determine if it is a header. If so, do NOT apply .rstrip
+			fasta_string=fasta_string+line  #add to list
+		else:
+			line=line.rstrip()								#if it is NOT a header, .rstrip to remove /n
+			fasta_string=fasta_string+line		 #convert to string 
+	#After the above block, the entire file is saved in the variable fasta_string. Headers are separated by sequences using a newline character, sequences are continuous-no new lines
+	#uses a for loop with finditer and .group to separate header and sequence
+  #creates dictionary in which key = header, value= sequence.
+	FASTAdict={}
+	for element in re.finditer(r">(\w+).*\n(\w+)", fasta_string):
+		FASTAdict[element.group(1)]=element.group(2)
+	
+	#break sequences into codons based on 1st 3 reading frame & reverse complements
+	for gene in FASTAdict:
+		seq=str(FASTAdict[gene])
+		codons1=re.sub(r'([GACT]{3})',r'\1 ', seq)
+		codons2=re.sub(r'[GACT]{1}([GACT]{3})',r'\1 ', seq)
+		codons3=re.sub(r'[GACT]{2}([GACT]{3})',r'\1 ', seq)
+		#reverse complement 
+		seqR=seq[::-1]
+		seqR=seqR.upper()
+		seqRC=seqR.replace('A','t').replace('T','a').replace('C','g').replace('G','c')
+		seqRC=seqRC.upper()
+		codonsR1=re.sub(r'([GACT]{3})',r'\1 ', seqRC)
+		codonsR2=re.sub(r'[GACT]{1}([GACT]{3})',r'\1 ', seqRC)
+		codonsR3=re.sub(r'[GACT]{2}([GACT]{3})',r'\1 ', seqRC)
+
+	#write to new file, defined in line 9 & print confirmation
+		seqout.write(f"\n{gene} frame 1 \n{codons1}\n{gene} frame2 \n{codons2}\n{gene} frame3 \n{codons3}\n{gene} frame R1 \n{codonsR1}\n{gene} frameR2 \n{codonsR2}\n{gene} frameR3 \n{codonsR3}")
+
+print("Writing complete")
