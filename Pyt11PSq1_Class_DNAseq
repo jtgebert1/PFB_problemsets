@@ -1,0 +1,41 @@
+#! usr/bin/env python3
+
+#establish class
+class DNArecord(object):
+	#define class attributes
+	def __init__(self, seq, name, organism):
+		self.seq=seq
+		self.name=name
+		self.organism=organism
+
+	#define methods
+	def length(self):
+		return len(self.seq)
+
+	def nuccomp(self):
+		countA=self.seq.count('A')
+		countT=self.seq.count('T')
+		countC=self.seq.count('C')
+		countG=self.seq.count('G')
+		return (f"A content:{countA} \nT content:{countT} \nC content:{countC} \nG content:{countG}")
+
+	def GCcontent(self):
+		countC=self.seq.count('C')
+		countG=self.seq.count('G')
+		total=len(self.seq)
+		return((countC + countG)/total)
+	
+	def FASTAform(self):
+		return(f">{self.name} {self.organism}\n{self.seq}")
+
+#make an object within the new class DNArecord 
+dna_record_obj1=DNArecord('ACTGGTCAACGTTGCTGA', 'gene1', 'human')
+
+#print attributes 
+print('Sequence: ', dna_record_obj1.seq)
+print('Gene name: ', dna_record_obj1.name)
+print('Organism: ', dna_record_obj1.organism)
+print('Length: ', dna_record_obj1.length())
+print(dna_record_obj1.nuccomp())
+print('GC content: ', dna_record_obj1.GCcontent())
+print(dna_record_obj1.FASTAform())
