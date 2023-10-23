@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+
+def DNAtolines(dna):
+	count=int(0)
+	dna_60nt_lines=''
+	dna=dna.rstrip()
+	for nuc in dna:
+		count=int(count)+1
+		if count==60:
+			dna_60nt_lines=dna_60nt_lines+nuc+'\n'
+			count=int(0)
+		else:
+			dna_60nt_lines=dna_60nt_lines+nuc
+
+	return(dna_60nt_lines)
+				
+dna = 'AGCTAGCTAGCTGATCGACTGACTCGACGCGCGCTATATATATAGCGCGCGATAGCTCGTAGATCGATCGACTACGCACGTGCTGGCTAGCTAGCTGATCGACTGACTCGACGCGCGCTATATATATAGCGCGCGATAGCTCGCTAGATCGATCGACTACGCAGCTAGCTAGCTGATCGACTGACTCGACGCGCGCCGTGCTGCTTATATATATAGCGCGCGATAGCTCGCTAGATCGATCGACTACGCAGCTAGCTAGCTGATCGACTGACTCGACGCGCGCTATATATATAGCGCGCGATAGCTCGCTAGATC'
+
+print(len(dna)/60, len(dna)%60)
+print(DNAtolines(dna))
+
+
