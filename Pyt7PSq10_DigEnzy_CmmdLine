@@ -1,0 +1,44 @@
+#!/usr/bint_env Python3
+
+import sys
+import re
+
+enzyme_input=sys.argv[1]
+FASTAfile=sys.argv[2]
+
+with open("test_enzyme_list.txt") as bionet:
+	enzyme_dict={}
+	count=0
+	header=''
+	for line in bionet:
+		count=count+1
+		if count < 10:
+			header=header+line	
+		else:
+			for found in re.finditer(r"(.+?)\s{2,}(\S.*)", line):
+				enzyme=found.group(1)
+				seq=found.group(2)
+				enzyme_dict[enzyme]=seq 
+
+with open(FASTAfile) as seq_file:
+	seq=''
+	for line in seq_file:
+		line=line.rstrip()
+		if line[0]=='>':
+			header=line
+		else:
+			seq=seq+line
+	
+	cutsite=enzyme_dict[enzyme_input]
+	cutsite=cutsite.rstrip()
+	recogseq=cutsite.replace('^', '')
+	seq_cutmarked=re.sub(recogseq, str(cutsite), seq)
+	fragcount=seq_cutmarked.count('^')+1
+	fraglist=seq_cutmarked.split('^')
+	fraglist_sorted=sorted(fraglist, key=len)
+
+print('Recognition sequence: ', recogseq)
+print('Cutsite: ', cutsite)
+print('Fragment #: ', fragcount)			
+print('Sequence w/ cutsite^: \n', seq_cutmarked)
+print('Fragments: \n', fraglist_sorted)
