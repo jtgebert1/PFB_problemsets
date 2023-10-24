@@ -18,22 +18,24 @@ for seq_record in SeqIO.parse('D_melanogaster_genomic.fna', "fasta"):
 		length=len(seq_record.seq)
 		length_list.append(length)
 		count=count+1
-		A=A+seq.count('A')
-		G=G+seq.count('G')
-		C=C+seq.count('C')
-		T=T+seq.count('T')
-		a=a+seq.count('a')
-		g=g+seq.count('g')
-		c=c+seq.count('c')
-		t=t+seq.count('t')
-		N=N+seq.count('N')
+		A=int(A+seq.count('A'))
+		G=int(G+seq.count('G'))
+		C=int(C+seq.count('C'))
+		T=int(T+seq.count('T'))
+		a=int(a+seq.count('a'))
+		g=int(g+seq.count('g'))
+		c=int(c+seq.count('c'))
+		t=int(t+seq.count('t'))
+		N=int(N+seq.count('N'))
 L50count=0
 indexN50=int(count/2)
 N50=length_list[indexN50]
 for length in length_list: 
 	if length>int(N50):
 		L50count=L50count+1	
-			
+
+
+	
 	#	else:
 	#		line_number=line_number+1
 	#		if line_number==2:
