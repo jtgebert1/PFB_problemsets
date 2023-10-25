@@ -1,0 +1,41 @@
+#!/usr/bint_env Python3
+
+import sys
+import re
+import statistics
+import math
+from Bio import SeqIO
+
+FASTAfile=sys.argv[1]
+output=sys.argv[2]
+
+with open("bionet.txt") as bionet:
+	enzyme_dict={}
+	count=0
+	header=''
+	for line in bionet:
+		count=count+1
+		if count < 10:
+			header=header+line	
+		else:
+			for found in re.finditer(r"(.+?)\s{2,}(\S.*)", line):
+				enzyme=found.group(1)
+				seq=found.group(2)
+				enzyme_dict[enzyme]=seq 
+
+with open('Restriction_digested_seq.txt', "w") as output_file:
+	for record in SeqIO.parse(FASTAfile, "fasta"):
+		output_file.write(f"Sequence ID :{record.id}\n")
+		for enzyme in enzyme_dict:
+			cutsite=enzyme_dict[enzyme]
+			cutsite=cutsite.rstrip()
+			recogseq=cutsite.replace('^', '')
+			seq_cutmarked=re.sub(recogseq, str(cutsite), str(record.seq))
+			fragcount=seq_cutmarked.count('^')+1
+			fraglist=seq_cutmarked.split('^')
+			fraglist_sorted=sorted(fraglist, key=len)
+			output_file.write(f"\tEnzyme name: {enzyme}\n")
+			output_file.write(f'\t\tNumber of fragments: {len(fraglist)}\n')
+			output_file.write(f'\t\tAverage fragment length: { statistics.mean([len(i) for i in fraglist])}\n')
+			output_file.write(f'\t\tMax fragment length:{len(fraglist[-1])}\n')
+			output_file.write(f'\t\tMin fragment length: {len(fraglist[0])}\n')
